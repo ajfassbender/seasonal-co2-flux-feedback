@@ -12,7 +12,9 @@ function weighted_mean = area_weighted_mean(var,ilat,ilon)
 % Output: 
 %   weighted average over lat, lon bounds
 %
-% Functions Called: getArea
+% Functions Called: 
+%   getArea
+%
 
 AREA = getArea(ilat,ilon);
 
@@ -34,7 +36,8 @@ for i = 1:o
     clear xvar area xnan ynan ind
     xvar = reshape(var(:,:,i),[],1);
     area = reshape(aarea,[],1);
-    % Only use values that exist in each matrix
+    
+    % Find good values
     ind = find(isnan(xvar)==0 & isnan(area)==0);
     
     w_mean(i,1) = nansum(xvar(ind) .* area(ind)) ./ nansum(area(ind));
