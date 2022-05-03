@@ -157,26 +157,30 @@ flux_model_sd = ncread([fpath '/EnsembleMean_C_Uptake.nc'],'tot_uptake_model_sd'
 x2 = [flux_l_sd;flux_nl_sd;flux_bpl_sd;flux_tl_sd;flux_model_sd] % Pg C
 
 vars    = {'Chem Lev','No Lev','BP Lev','T Lev','Model Output'};
-delta   = x1 - x1(1);
-delta_p = 100.*(x1 - x1(1))./x1(1);
+delta   = x1 - x1(2);
+delta_p = 100.*(x1 - x1(2))./x1(2);
 
 t0 = cell2table(vars(:),'VariableNames',{'Cumulative Global Flux'});
 t1 = array2table([x1 x2 delta delta_p],'VariableNames',{'EM Pg C' 'EM Pg C (StDev)' 'Uptake Diff' '% Diff'});
 t  = [t0 t1]
 
-%  8% less uptake in reconstruction w/o leverage
-% 17% less uptake in reconstruction w/ bp leverage only
-%  9% more uptake in reconstruction w/ t leverage only
-%  1% less uptake in model output relative to reconstruction w/ leverage
+% Differences relative to no-leverage
+%  8.1% more uptake in reconstruction w/ leverage
+% 18.4% less uptake in reconstruction w/ bp leverage only
+% 10.2% more uptake in reconstruction w/ t leverage only
+
+% Difference between reconstruction and model output
+x1(end) - x1(1);
+100.*(x1(end)- x1(1))./x1(1)
+%  1.1% less uptake in model output relative to reconstruction w/ leverage
 
 % Error Propagation for Leverage vs. No Leverage
-v = (x2(2)^2 + x2(1)^2)^.5 
+v = (x2(1)^2 + x2(2)^2)^.5 
 % --> 1.7284 PgC; uncertainty in the PgC difference (37 ± 2 Pg C)
 
-
-val = 100 .* (x1(1) - x1(2))/ x1(1)
-(val) .* ((v./(x1(1) - x1(2)))^2 + (x2(1)./x1(2))^2 ) ^.5
-% --> 0.35 % uncertainty in the percentage difference (8 ± 0.4 %)
+val = 100 .* (x1(1) - x1(2))/ x1(2)
+(val) .* ((v./(x1(1) - x1(2)))^2 + (x2(2)./x1(2))^2 ) ^.5
+% --> 0.3801 % uncertainty in the percentage difference (8.1 ± 0.4 %)
 
 
 %% North Pacific Percentage -----------------------------------

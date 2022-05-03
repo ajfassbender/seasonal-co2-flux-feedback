@@ -85,6 +85,24 @@ disp('Total time:')
 minutes((now - st_0)*24*60)
 
 
+%% Chemical Leverage Impact on pCO2 BP and pCO2 T
+
+ilat       = -89.5:1:89.5;
+ilon       =  0.5:1:359.5;
+
+dco2_bp    = ncread(fpath,'Aco2_bp_90s')    - ncread(fpath,'Aco2_bp_50s');
+dco2_bp_nl = ncread(fpath,'Aco2_bp_nl_90s') - ncread(fpath,'Aco2_bp_nl_50s');
+dco2_bp_p  = 100 .* ((dco2_bp-dco2_bp_nl)./dco2_bp);
+area_weighted_mean(dco2_bp_p,ilat,ilon) % 45 ± 88 percent
+area_weighted_std(dco2_bp_p,ilat,ilon)
+
+dco2_t    = ncread(fpath,'Aco2_t_90s')    - ncread(fpath,'Aco2_t_50s');
+dco2_t_nl = ncread(fpath,'Aco2_t_nl_90s') - ncread(fpath,'Aco2_t_nl_50s');
+dco2_t_p  = 100 .* ((dco2_t-dco2_t_nl)./dco2_t);
+area_weighted_mean(dco2_t_p,ilat,ilon) % 101 ± 11 percent
+area_weighted_std(dco2_t_p,ilat,ilon) 
+
+
 % Save Results -----------------------------------
 
 fpath = [data_path '/Ensemble_Members'];
@@ -140,24 +158,16 @@ fpath = [data_path '/Ensemble_Members'];
 area  = reshape(transpose(getArea(-89.5:1:89.5,.5:359.5)),[],1);
 
 for i = 1:length(vars)
-    X_50 = reshape(ncread([fpath   '/Ensemble_Mean_AmplitudeChanges_1950_2090.nc'], [char(vars(i)) '_50s']),[],1);  
-    X_90 = reshape(ncread([fpath   '/Ensemble_Mean_AmplitudeChanges_1950_2090.nc'], [char(vars(i)) '_90s']),[],1);   
-
-    delta = X_90 - X_50;
-
-    ind         = find(isnan(delta)==0 & isnan(area)==0);
-    N           = length(ind);
-    wmean(i,1)  = nansum(delta(ind) .* area(ind)) ./ nansum(area(ind));
-    numerator   = N .* nansum(area(ind) .* (delta(ind) - mn).^2);
-    denominator = (N - 1) .* nansum(area(ind));
-    wstdev(i,1) = (numerator ./ denominator).^.5;
+    X_50 = ncread([fpath   '/Ensemble_Mean_AmplitudeChanges_1950_2090.nc'], [char(vars(i)) '_50s']);  
+    X_90 = ncread([fpath   '/Ensemble_Mean_AmplitudeChanges_1950_2090.nc'], [char(vars(i)) '_90s']);   
+    
+    delta = X_90-X_50;
+    wmean(i,1)  = area_weighted_mean(delta,ilat,ilon);
+    wstdev(i,1) = area_weighted_std( delta,ilat,ilon);
 
     delta_p = 100 .* delta./X_50;
-
-    wmean_p(i,1)  = nansum(delta_p(ind) .* area(ind)) ./ nansum(area(ind));
-    numerator     = N .* nansum(area(ind) .* (delta_p(ind) - mn).^2);
-    denominator   = (N - 1) .* nansum(area(ind));
-    wstdev_p(i,1) = (numerator ./ denominator).^.5;
+    wmean_p(i,1)  = area_weighted_mean(delta_p,ilat,ilon);
+    wstdev_p(i,1) = area_weighted_std( delta_p,ilat,ilon);
 end 
 
 t0 = cell2table(vars(:),'VariableNames',{'1950s-2090s Change'});

@@ -21,7 +21,7 @@
 disp('set your paths')
 data_path = cd;
 
-%% Calculations -----------------------------------
+%% pCO2 correlations -----------------------------------
 
 area = transpose(getArea(-89.5:1:89.5,.5:359.5));
 
@@ -81,6 +81,39 @@ nanmean(std_bias) %   2.5370
 nanmean(r_coeff2)  %    0.9997
 nanmean(av_bias2)  %   -2.125
 nanmean(std_bias2) %    3.1506
+
+
+%% CO2 Flux correlations  -----------------------------------
+
+area = transpose(getArea(-89.5:1:89.5,.5:359.5));
+
+st_0 = now;
+for ii = 1:30
+	clearvars -except data_path fpath ii st_0 area r_coeff av_bias std_bias r_coeff2 av_bias2 std_bias2
+
+	fpath = [data_path '/Ensemble_Members/m' num2str(ii)];
+
+	disp(['Start ensemble member ' num2str(ii)])   
+	st_1 = now;
+
+	flux_keff = ncread([fpath  '/flux_keff.nc'],'flux_keff'); 
+	mflux     = -1.*ncread([fpath  '/mflux.nc'],'mflux');
+
+	% Correlations w/ bias correction
+	x = reshape(mflux,[],1);
+	y = reshape(flux_keff,[],1);
+	z = find(isfinite(x)==1 & isfinite(y)==1);
+	[r,p] = corrcoef(x(z),y(z));
+	r_coeff(ii,1) = r(1,2);
+
+	disp(['Complete ensemble member ' num2str(ii) ' CO2Sys Calcs'])
+	minutes((now - st_1)*24*60)
+end
+disp('Total time:')
+minutes((now - st_0)*24*60)
+
+% Correlations
+nanmean(r_coeff)  % 0.9872
 
 %% Clean up -----------------------------------
 
