@@ -10,7 +10,6 @@
 % FUNCTIONS CALLED:
 %   tight_subplot: https://www.mathworks.com/matlabcentral/fileexchange/27991-tight_subplot-nh-nw-gap-marg_h-marg_w 
 %   m_map toolbox: https://www.eoas.ubc.ca/~rich/map.html
-%   getArea: Computes surface area (m2) of each 1° latitide by 1° longitude horizontal grid
 %
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
@@ -29,7 +28,6 @@ fig_path  = cd;
 
 lon  = ncread([data_path '/Ensemble_Members/lon.nc'],'lon'); 
 lat  = ncread([data_path '/Ensemble_Members/lat.nc'],'lat');
-area = getArea(-89.5:1:89.5,.5:359.5);
 
 l_sd   = ncread([data_path '/Ensemble_Members/EnsembleMean_C_Uptake.nc'],'uptake_l_sd');
 nl_sd  = ncread([data_path '/Ensemble_Members/EnsembleMean_C_Uptake.nc'],'uptake_nl_sd');
