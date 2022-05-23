@@ -9,7 +9,7 @@
 %   fig_path:  directory where figure will be saved
 %
 % FUNCTIONS CALLED:
-%	None. 
+%   cmocean: https://www.mathworks.com/matlabcentral/fileexchange/57773-cmocean-perceptually-uniform-colormaps
 %
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
