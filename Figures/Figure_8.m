@@ -55,13 +55,13 @@ for i = 1:length(leg)
     if j>9
       x   = ncread([fpath '/Figure8_2090s_Sensitivity_Terms.nc'],uvar);
       xx  = x(lon_1,lat_1,:);
-      x_out = area_weighted_mean(xx,lon_1,lat(lat_1));
+      x_out = area_weighted_mean(xx,lat(lat_1),lon_1);
       eval([uvar '_awm(:,i) = x_out;'])
       else
         for mm = 1:12
           x   = ncread([fpath '/Figure8_2090s_Ensemble_Mean_SeasCycles.nc'],uvar,[1 1 mm], [Inf Inf 1]);  
           xx  = x(lon_1,lat_1,:);
-          x_out(mm) = area_weighted_mean(xx,lon_1,lat(lat_1));  
+          x_out(mm) = area_weighted_mean(xx,lat(lat_1),lon_1);  
         end
         eval([uvar '_awm(:,i) = x_out;'])
       end
