@@ -9,6 +9,8 @@
 %
 % FUNCTIONS CALLED:
 %   getArea: Computes surface area (m2) of each 1° latitide by 1° longitude horizontal grid
+%   area_weighted_mean: computes area weighted mean
+%   area_weighted_std: computes area weighted standard deviation
 % 
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
@@ -45,10 +47,8 @@ for ii = 1:30
 	r_coeff(ii,1) = r(1,2);
 	
 	diffy = co2 - co2_corr; clear M
-	av_bias(ii,1)  = nanmean(nanmean(nanmean(diffy.* area))) ./ nanmean(nanmean(area)); % uatm
-	d = reshape(diffy,360*180,1812);
-	a = reshape(area,360*180,1);
-	std_bias(ii,1) = nanmean(nanstd(d.* a,[],1)) ./ nanmean(a); % uatm
+	av_bias(ii,1)  = area_weighted_mean(diffy,-89.5:1:89.5,.5:359.5);
+	std_bias(ii,1) = area_weighted_std( diffy,-89.5:1:89.5,.5:359.5);
 	clear co2_corr x y z r p diffy 
 
 	% Correlations w/o bias correction
@@ -61,12 +61,10 @@ for ii = 1:30
 	r_coeff2(ii,1) = r(1,2);
 	
 	diffy = co2 - co2_totl; clear M
-	av_bias2(ii,1)  = nanmean(nanmean(nanmean(diffy.* area))) ./ nanmean(nanmean(area)); % uatm
-	d = reshape(diffy,360*180,1812);
-	a = reshape(area,360*180,1);
-	std_bias2(ii,1) = nanmean(nanstd(d.* a,[],1)) ./ nanmean(a); % uatm
+	av_bias2(ii,1)  = area_weighted_mean(diffy,-89.5:1:89.5,.5:359.5);
+	std_bias2(ii,1) = area_weighted_std( diffy,-89.5:1:89.5,.5:359.5);
 
-	disp(['Complete ensemble member ' num2str(ii) ' CO2Sys Calcs'])
+	disp(['Complete ensemble member ' num2str(ii)])
 	minutes((now - st_1)*24*60)
 end
 disp('Total time:')
@@ -74,13 +72,13 @@ minutes((now - st_0)*24*60)
 
 % Correlations w/ bias correction
 nanmean(r_coeff)  %   0.9998
-nanmean(av_bias)  %   2.8866e-04
-nanmean(std_bias) %   2.5370
+nanmean(av_bias)  %   2.4118e-04
+nanmean(std_bias) %   2.4762
 
 % Correlations w/o bias correction
 nanmean(r_coeff2)  %    0.9997
-nanmean(av_bias2)  %   -2.125
-nanmean(std_bias2) %    3.1506
+nanmean(av_bias2)  %   -1.8232
+nanmean(std_bias2) %    3.0349
 
 
 %% CO2 Flux correlations  -----------------------------------
