@@ -158,27 +158,21 @@ for j = 1:3
     datetick('x','yy','keepticks');
     xlim([Time(1) Time(end)])
     title([char(t_title(j))])
+    ylim([-275 275])
     yylim=get(gca,'YLim');xxlim=get(gca,'XLim');
     clear xr; xr = diff(xxlim);
     clear yr; yr = diff(yylim);
     if j+3 ==4
         ylabel({'\itp\rmCO_{2 T} Anom.','(\muatm)'})
         set(h,'Color',col(1,:));
-        ylim([-275 275])
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(b)','VerticalAlignment','bottom','HorizontalAlignment','left','fontsize',8)
     elseif j+3 == 5
-        set(h,'Color',col(2,:));
         set(gca,'yticklabel',[])
-        ylim([-275 275])        
+        set(h,'Color',col(2,:));
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(c)','VerticalAlignment','bottom','HorizontalAlignment','left','fontsize',8)
     elseif j+3 == 6
-        set(h,'Color',col(3,:));
         set(gca,'yticklabel',[])
-        ylim([-275 275])
-        
-        yylim=get(gca,'YLim');xxlim=get(gca,'XLim');
-        clear xr; xr = diff(xxlim);
-        clear yr; yr = diff(yylim);
+        set(h,'Color',col(3,:));
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(d)','VerticalAlignment','bottom','HorizontalAlignment','left','fontsize',8)
     end
     box on; grid on
@@ -192,23 +186,21 @@ for j = 1:3
     set(gca,'xtick',Time(1):2.*365:Time(end))
     datetick('x','yy','keepticks');
     xlim([Time(1) Time(end)])
+    ylim([-275 275])
     yylim=get(gca,'YLim');xxlim=get(gca,'XLim');
     clear xr; xr = diff(xxlim);
     clear yr; yr = diff(yylim);
     if  j+6== 7
         ylabel({'\itp\rmCO_{2 BP} Anom.','(\muatm)'})
         set(h,'Color',col(1,:));
-        ylim([-275 275])
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(e)','VerticalAlignment','bottom','HorizontalAlignment','left','fontsize',8)
     elseif j+6 == 8
-        set(h,'Color',col(2,:));
         set(gca,'yticklabel',[])
-        ylim([-275 275])
+        set(h,'Color',col(2,:));
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(f)','VerticalAlignment','bottom','HorizontalAlignment','left','fontsize',8)
     elseif j+6 == 9
-        set(h,'Color',col(3,:));
         set(gca,'yticklabel',[])
-        ylim([-275 275])
+        set(h,'Color',col(3,:));
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(g)','VerticalAlignment','bottom','HorizontalAlignment','left','fontsize',8)
     end
     box on; grid on
@@ -222,22 +214,23 @@ for j = 1:3
     set(gca,'xtick',Time(1):2.*365:Time(end))
     datetick('x','yy','keepticks');
     xlim([Time(1) Time(end)])
+    ylim([-275 275])
     yylim=get(gca,'YLim');xxlim=get(gca,'XLim');
     clear xr; xr = diff(xxlim);
     clear yr; yr = diff(yylim);
     if j+9==10
         ylabel({'\itp\rmCO_{2} Anom.','(\muatm)'})
-        set(h,'Color',col(1,:));ylim([-275 275])        
+        set(h,'Color',col(1,:));        
         text(xxlim(1)-.1*xr,yylim(2)+ .01*yr,'(h)','VerticalAlignment','bottom',...
             'HorizontalAlignment','left','fontsize',8)
     elseif j+9 == 11
         set(gca,'yticklabel',[])
-        set(h,'Color',col(2,:));ylim([-275 275])        
+        set(h,'Color',col(2,:));       
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(i)','VerticalAlignment','bottom',...
             'HorizontalAlignment','left','fontsize',8)
     elseif j+9 == 12
         set(gca,'yticklabel',[])
-        set(h,'Color',col(3,:));ylim([-275 275])         
+        set(h,'Color',col(3,:));        
         text(xxlim(1)-.1.*xr,yylim(2)+ .01*yr,'(j)','VerticalAlignment','bottom',...
             'HorizontalAlignment','left','fontsize',8)
     end
