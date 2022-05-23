@@ -155,7 +155,7 @@ vars = {'Adic','Ata','Asst','Awind','mld_max','Aco2_totl','Aco2_t','Aco2_t_nl','
 uni  = {'umol/kg','umol/kg','C','m/s','m','uatm','uatm','uatm','uatm','uatm'};
 
 fpath = [data_path '/Ensemble_Members'];
-area  = reshape(transpose(getArea(-89.5:1:89.5,.5:359.5)),[],1);
+area  = reshape(transpose(getArea(ilat,ilon)),[],1);
 
 for i = 1:length(vars)
     X_50 = ncread([fpath   '/Ensemble_Mean_AmplitudeChanges_1950_2090.nc'], [char(vars(i)) '_50s']);  
