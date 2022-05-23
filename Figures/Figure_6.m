@@ -11,6 +11,7 @@
 % FUNCTIONS CALLED:
 %   m_map toolbox: https://www.eoas.ubc.ca/~rich/map.html
 %   tight_subplot: https://www.mathworks.com/matlabcentral/fileexchange/27991-tight_subplot-nh-nw-gap-marg_h-marg_w
+%   cmocean: https://www.mathworks.com/matlabcentral/fileexchange/57773-cmocean-perceptually-uniform-colormaps
 % 
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
@@ -367,7 +368,7 @@ for l=1:6
         latuse = reshape(yy,[],1);
         lonuse = reshape(xx,[],1);
         [Xd,Yd] = m_ll2xy(lonuse,latuse);
-        stipple(reshape(Xd,180,360), reshape(Yd,180,360),mask,'color',rgb('black'),'density',90,'markersize',2)
+        stipple(reshape(Xd,180,360), reshape(Yd,180,360),mask,'color','k','density',90,'markersize',2)
         m_grid('tickdir','in','linestyle','none','backcolor',[.5 .5 .5],'xticklabels',[],'yticklabels',[]);
     else
         h=m_pcolor(lon,lat,ruse);hold on;%shading interp
@@ -377,7 +378,7 @@ for l=1:6
         latuse = reshape(yy,[],1);
         lonuse = reshape(xx,[],1);
         [Xd,Yd] = m_ll2xy(lonuse,latuse);
-        stipple(reshape(Xd,180,360), reshape(Yd,180,360),mask,'color',rgb('black'),'density',90,'markersize',2)
+        stipple(reshape(Xd,180,360), reshape(Yd,180,360),mask,'color','k','density',90,'markersize',2)
         m_grid('tickdir','in','linestyle','none','backcolor',[.5 .5 .5],'xticklabels',[],'yticklabels',[]);
     end
 
