@@ -9,6 +9,8 @@
 %
 % FUNCTIONS CALLED:
 %   getArea: Computes surface area (m2) of each 1° latitide by 1° longitude horizontal grid
+%   area_weighted_mean: computes area weighted mean
+%   area_weighted_std: computes area weighted standard deviation
 % 
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
