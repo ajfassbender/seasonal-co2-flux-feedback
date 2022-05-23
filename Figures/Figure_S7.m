@@ -9,7 +9,7 @@
 %   fig_path:  directory where figure will be saved
 %
 % FUNCTIONS CALLED:
-%   None.
+%   rgb: https://www.mathworks.com/matlabcentral/fileexchange/24497-rgb-triple-of-color-name-version-2/
 %
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
