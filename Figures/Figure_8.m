@@ -10,6 +10,7 @@
 % FUNCTIONS CALLED:
 %   subtightplot: https://www.mathworks.com/matlabcentral/fileexchange/39664-subtightplot
 %   area_weighted_mean: computes area weighted mean
+%   rgb: https://www.mathworks.com/matlabcentral/fileexchange/24497-rgb-triple-of-color-name-version-2/
 % 
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
