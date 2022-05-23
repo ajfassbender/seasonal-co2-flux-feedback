@@ -12,6 +12,7 @@
 %   subtightplot: https://www.mathworks.com/matlabcentral/fileexchange/39664-subtightplot
 %   m_map toolbox: https://www.eoas.ubc.ca/~rich/map.html
 %   getArea: Computes surface area (m2) of each 1° latitide by 1° longitude horizontal grid
+%   cmocean: https://www.mathworks.com/matlabcentral/fileexchange/57773-cmocean-perceptually-uniform-colormaps
 %
 % AUTHOR:
 %   A. J. Fassbender (NOAA-PMEL): andrea.j.fassbender@noaa.gov
